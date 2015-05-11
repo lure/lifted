@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:lift="http://liftweb.net/">
+<div data-lift="surround?with=default&at=content">
+    <div data-lift="ItemSnippet.edit?form=post">
+        <h2 id="item.id">Edit Item </h2>
+        <input type="hidden" id="hidden">
+        <lift:Msgs>
+            <lift:error_msg>Errors: </lift:error_msg>
+            <lift:error_class>bg-danger</lift:error_class>
+            <lift:notice_msg>Info: </lift:notice_msg>
+            <lift:notice_class>bg-info</lift:notice_class>
+            <lift:warning_msg>Warning: </lift:warning_msg>
+            <lift:warning_class>bg-warning</lift:warning_class>
+        </lift:Msgs>
+        <div class="form-group" id="item.name.div">
+            <label for="item.name" class="control-label">Item name</label>
+            <input type="text" id="item.name" class="form-control" placeholder="Enter item name">
+        </div>
+        <button id="submit" type="submit" class="btn btn-default">Submit</button>
+        <button id="cancel" type="submit" class="btn btn-danger">Submit</button>
+    </div>
+</div>

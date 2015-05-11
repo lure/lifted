@@ -10,8 +10,9 @@ libraryDependencies ++= {
   val liftVersion = "2.6.2"
   Seq(
     "net.liftweb" %% "lift-webkit" % liftVersion % "compile",
-    "org.eclipse.jetty" % "jetty-webapp" % "9.3.0.M2" % "container,test",
-    "org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" % "container,compile" artifacts Artifact("javax.servlet", "jar", "jar")
+    "org.eclipse.jetty" % "jetty-webapp" % "9.3.0.M2" % "container,test,compile",
+    "org.slf4j" % "slf4j-jdk14" % "1.7.12"
+    //"org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" % "container,compile" artifacts Artifact("javax.servlet", "jar", "jar")
   )
 }
 
