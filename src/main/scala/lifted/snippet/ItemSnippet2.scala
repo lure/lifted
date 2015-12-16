@@ -4,6 +4,7 @@ package lifted.snippet
 import lifted.{Item, ItemDao}
 import net.liftweb.common.{Box, Empty, Full}
 import net.liftweb.http._
+import net.liftweb.http.js.{JsCmds, JsCmd}
 import net.liftweb.http.js.JsCmds.RedirectTo
 import net.liftweb.sitemap.Loc._
 import net.liftweb.sitemap.{Loc, Menu}
@@ -83,10 +84,14 @@ class ItemSnippet2 extends StatefulSnippet {
           "#item.name" #> SHtml.text(item.name, nm => cursorItem = Full(item.copy(name = nm))) &
           "#submit" #> SHtml.onSubmitUnit(OnSave) &
           "#item.name.div [class+]" #> (if (S.errors.nonEmpty) "has-error" else "") &
-          "#cancel" #> SHtml.button("Cancel", () => {
-            S.notice("msg", "Edit: canceled")
-            S.redirectTo(ItemListMenu.loc.calcDefaultHref)
+          "#cancel" #> SHtml.ajaxButton("Cancel", () => {
+            RedirectTo(ItemListMenu.loc.calcDefaultHref, () => S.notice("msg", "Edit: canceled"))
           })
+//        "#cancel" #> SHtml.button("Cancel", () => {
+//          S.notice("msg", "Edit: canceled")
+//          S.redirectTo(ItemListMenu.loc.calcDefaultHref)
+//        })
+
       case _ => S.redirectTo(ItemListMenu.loc.calcDefaultHref)
     }
   }
