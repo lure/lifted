@@ -16,7 +16,7 @@ object ItemDao {
     items += (i -> Item(i, "item " + i))
   }
 
-  private var index: Integer = items.size
+  private var index: Int = items.size
 
   def list: List[Item] = items.values.toList.sortBy(_.id)
 
@@ -28,7 +28,7 @@ object ItemDao {
     items(item.id) = item
   }
 
-  def delete(id: Integer) = items.remove(id)
+  def delete(id: Int) = items.remove(id)
 
   def delete(item: Item) = withNotNull(item) {
     items.remove(item.id)
@@ -36,7 +36,11 @@ object ItemDao {
 
   def newItem = {
     index = index + 1
-    Item(index, "item" + index, new Date, isNew = true)
+    Item(index, "Item " + index, new Date, isNew = true)
+  }
+
+  def findById(id: Int): Item = {
+    list.find(_.id == id).orNull
   }
 
   private def withNotNull(item: Item)(f: => Any) = {

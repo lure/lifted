@@ -1,22 +1,26 @@
 package lifted.snippet
 
-import lifted.ItemDao
-import net.liftweb.http.{S, SHtml}
+import lifted.{Item, ItemDao}
+import net.liftweb.common.Box
+import net.liftweb.http.{RequestVar, S, SHtml}
+import net.liftweb.sitemap.{*, Loc, Menu}
 import net.liftweb.util.Helpers._
 
 import scala.xml.{Elem, Text}
 
 class ItemSnippet {
+  object ItemVar  extends RequestVar[Item](ItemDao.newItem)
 
   def list = {
-    "@itemList *" #> ItemDao.list.map {
+    "data-name=itemList *" #> ItemDao.list.map {
       item =>
-        "@th *" #> item.id &
-          "@nm *" #> item.name &
-          "@br *" #> item.birth.toString &
-          ".actions *" #> {
-            SHtml.link("/item/edit", () => ItemVar(item), Text("edit")) ++ Text(" ") ++
-              SHtml.link("/item/list", () => ItemDao.delete(item), Text("delete"))
+        "data-name=th *" #> item.id &
+          "data-name=item-link [href]" #> "#" & //ItemMenu.calcHref(item) &
+          "data-name=item-link *" #> item.name &
+          "data-name=br *" #> item.birth.toString &
+          "data-name=actions *" #> {
+            SHtml.link("/items/edit", () => ItemVar(item), Text("edit")) ++ Text(" ") ++
+              SHtml.link("/items/list", () => ItemDao.delete(item), Text("delete"))
           }
     }
   }
@@ -30,11 +34,11 @@ class ItemSnippet {
       "#item.name.div [class+]" #> (if (S.errors.nonEmpty) "has-error" else "") &
       "#cancel" #> SHtml.button("Cancel", () => {
         S.notice("msg", "Edit canceled")
-        S.redirectTo("/item/list")
+        S.redirectTo("/items/list")
       })
   }
 
-  private def OnSave(): Unit = {
+  def OnSave(): Unit = {
     if (ItemVar.is.name.length < 3) {
       S.error("Item name must be at least 3 characters")
     } else {
@@ -42,6 +46,5 @@ class ItemSnippet {
       S.notice("msg", "Save: success")
       S.redirectTo("/item/list")
     }
-
   }
 }

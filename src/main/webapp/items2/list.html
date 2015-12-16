@@ -1,0 +1,27 @@
+<div data-lift="surround?with=default&at=content">
+    <div data-lift="ItemSnippet2.list?form=post">
+        <h2>Items list</h2>
+
+        <div class="center-block"><input data-name="add-button" type="button" value="Add" class="btn-xs btn-success"/>
+
+            <p data-lift="Msg?id=msg&noticeClass=bg-success&errorClass=bg-danger&warningClass=bg-warning">notice</p>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>birth</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-name="itemList">
+                <th scope="row" data-name="th">1</th>
+                <td ><a href="#" data-name="item-link">Template row 1</a></td>
+                <td data-name="br">just now</td>
+                <td data-name="actions" class="actions"><a>delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
